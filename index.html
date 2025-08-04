@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jondu Global Services - Plastic Bag Manufacturing & Custom Orders</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"></link>
+    <style>
+        /* Custom fonts based on user request */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif; /* Regular text and paragraphs now use Plus Jakarta Sans */
+            background-color: #FDFDFD; /* Very close to white background */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cinzel', serif; /* Headers use Cinzel */
+            font-weight: 700; /* Set headers to bold */
+        }
+        /* Specific style for the "QUALITY CRAFTED" text */
+        .hero-heading {
+            font-family: 'Cinzel', serif;
+            font-weight: 700; /* Bold weight */
+            text-transform: uppercase; /* All caps */
+        }
+        .service-icon-bg {
+            background-color: #2C2C2C; /* Dark background for service icons */
+        }
+        /* Updated button gradient with new accent color */
+        .btn-accent-gradient {
+            background-image: linear-gradient(to right, #748873, #8FA38E); /* Muted green gradient for buttons */
+        }
+        .btn-accent-gradient:hover {
+            background-image: linear-gradient(to right, #8FA38E, #748873);
+        }
+        .btn-outline-white {
+            border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border for outline buttons */
+            color: white;
+        }
+        .btn-outline-white:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        /* Updated yellow accent tag to use new accent color */
+        .accent-tag {
+            background-color: #748873; /* New accent color */
+            color: white; /* White text for contrast */
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px; /* Fully rounded */
+            font-weight: 600;
+            font-size: 0.875rem; /* text-sm */
+        }
+        .circular-element {
+            border: 1px dashed #D1D5DB; /* Light gray dashed border */
+        }
+        .dark-section-bg {
+            background-color: #1A1A1A; /* Dark background for services section */
+        }
+        /* Navbar glass effect and floating */
+        #main-navbar {
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+        .navbar-glass {
+            background-color: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px); /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle light border */
+            box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15); /* Larger shadow for floating effect */
+            margin: 1.5rem auto; /* More space from the top, centered horizontally */
+            width: calc(100% - 6rem); /* Reduced width: 3rem margin on each side */
+            border-radius: 4rem; /* Increased radius */
+            padding-left: 2rem; /* Increased padding for better fit */
+            padding-right: 2rem; /* Increased padding for better fit */
+        }
+        /* Adjust header padding for mobile to prevent content overlap */
+        @media (max-width: 767px) {
+            .navbar-glass {
+                margin: 1rem auto; /* More space from the top, centered horizontally */
+                width: calc(100% - 2rem); /* Reduced width: 1.5rem margin on each side */
+                border-radius: 3rem; /* Slightly smaller radius for mobile */
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+        /* Navbar link default color - will be animated by GSAP */
+        .nav-link-item {
+            color: #333333; /* Default dark color for nav links */
+        }
+        /* SVG Bag Styling */
+        .svg-bag-bg {
+            position: absolute;
+            opacity: 0.05; /* Very subtle */
+            pointer-events: none; /* Ensure it doesn't block clicks */
+            z-index: 0; /* Behind content */
+            transition: stroke 0.3s ease-in-out; /* Smooth transition for color change */
+        }
+        .svg-bag-bg svg {
+            width: 150px; /* Adjust size as needed */
+            height: 150px;
+            stroke-width: 1.5px; /* Adjusted to 1.5px for a thinner outline */
+            fill: none; /* No fill for outline */
+        }
+        /* Specific colors for bags based on section background */
+        .svg-bag-bg.light-bg svg {
+            stroke: #333333; /* Dark stroke for light backgrounds */
+        }
+        .svg-bag-bg.dark-bg svg {
+            stroke: #FFFFFF; /* White stroke for dark backgrounds */
+        }
+        /* Inverted corner clip-path for image div */
+        .inverted-corner-clip {
+            border-radius: 0 !important; /* Override any existing border-radius */
+            clip-path: polygon(
+                0% 50px,
+                50px 0%,
+                calc(100% - 20px) 0%,
+                100% 20px,
+                100% calc(100% - 60px),
+                calc(100% - 60px) 100%,
+                20px 100%,
+                0% calc(100% - 20px)
+            );
+            -webkit-clip-path: polygon(
+                0% 50px,
+                50px 0%,
+                calc(100% - 20px) 0%,
+                100% 20px,
+                100% calc(100% - 60px),
+                calc(100% - 60px) 100%,
+                20px 100%,
+                0% calc(100% - 20px)
+            );
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.3.1",
+    "react-dom": "https://esm.sh/react-dom@18.3.1",
+    "react-dom/client": "https://esm.sh/react-dom@18.3.1/client",
+    "gsap": "https://esm.sh/gsap@3.12.5",
+    "gsap/": "https://esm.sh/gsap@3.12.5/",
+    "react-router-dom": "https://esm.sh/react-router-dom@6.24.1?external=react",
+    "react-dom/": "https://esm.sh/react-dom@18.3.1/",
+    "react/": "https://esm.sh/react@18.3.1/",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.44.4",
+    "@supabase/supabase-js/": "https://esm.sh/@supabase/supabase-js@2.44.4/",
+    "lenis": "https://esm.sh/lenis@1.1.6"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="text-neutral-800">
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
